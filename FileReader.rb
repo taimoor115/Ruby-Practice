@@ -141,30 +141,192 @@
 
 # puts Calculator(1,2,"*")
 
-def getDay(day)
-  dayName = ""
-  case day
-  when "mon"
-    dayName = "Monday"
-  when "mon"
-    dayName = "Monday"
-  when "tues"
-    dayName = "Tuesday"
-  when "wed"
-    dayName = "Wednesday"
-  when "thurs"
-    dayName = "Thursday"
-  when "fri"
-    dayName = "Friday"
-  when "sat"
-    dayName = "Saturday"
-  when "sun"
-    dayName = "Sunday"
-  else
-     puts  "Invalid"
+# def getDay(day)
+#   dayName = ""
+#   case day
+#   when "mon"
+#     dayName = "Monday"
+#   when "mon"
+#     dayName = "Monday"
+#   when "tues"
+#     dayName = "Tuesday"
+#   when "wed"
+#     dayName = "Wednesday"
+#   when "thurs"
+#     dayName = "Thursday"
+#   when "fri"
+#     dayName = "Friday"
+#   when "sat"
+#     dayName = "Saturday"
+#   when "sun"
+#     dayName = "Sunday"
+#   else
+#      puts  "Invalid"
 
-     return dayName
+#      return dayName
+#   end
+# end
+
+# puts getDay("thurs")
+
+#While loop
+# index = 1
+# while index <= 5
+#   puts index
+#   index = index + 1
+# end
+
+
+# Guess Game
+
+# secret_word = "Hymm"
+# guess = ""
+# guess_count = 0
+# guess_limit = 1
+# out_of_guesses = false
+
+
+# while guess != secret_word && !out_of_guesses
+#   if guess_count < guess_limit
+#     puts "     \"Guess Secret Word \""
+#     puts " 1. Haha  2. Hehe  3. Nope  4.Hymm"
+#   puts "Guess the word"
+#   guess = gets.chomp()
+#   guess_count += 1
+#   else
+#     out_of_guesses = true
+#   end
+# end
+# if out_of_guesses
+#   puts "You Lose!!!"
+# else
+# puts "You Won!!!"
+# end
+
+# For loop
+# arr = [1,2,3,4,5,6,7,8]
+
+# for i in arr
+#   puts i
+# end
+#For each
+
+# arr = [1,2,3]
+# arr.each do |i|
+#    puts  i
+# end
+
+# Times loop
+# 5.times do |i|
+#   puts i
+# end
+
+# for index in 0..9
+#   puts index
+# end
+
+
+# File Opening
+# arr = []
+
+# File.open("/home/taimoor_hussain/Downloads/Ruby/PracticeFiles/practice.txt", "r") do |i|
+
+#      for line in i.readlines()
+#       arr << line
+#      end
+# end
+
+# newArr = arr[0]
+# puts newArr
+
+# puts newArr[2]
+
+
+
+# Exception Handling
+# begin
+# 9/0
+# rescue
+# puts "Division with zero"
+# end
+
+# class Book
+# attr_accessor :name, :price
+#   def initialize(name, price)
+#     @name = name
+#     @price = price
+#   end
+# end
+
+# book1 = Book.new
+# book1.name = " Computer Science"
+# book1.price = 100
+# puts book1.name
+# book2 = Book.new("English", 200)
+# puts book2.name
+# puts book2.price
+
+require "csv"
+temp = []
+date = []
+humid = []
+table = CSV.parse(File.read("/home/taimoor_hussain/Downloads/Ruby/lahore_weather/lahore_weather_2011_Aug.txt"), headers: true) # It converts the data into 2d Array
+# Temperature Array
+i = 1
+j = 1
+while i != 31
+  temp << table[i][j].to_i
+  i += 1
+end
+# Date Array
+i = 1
+j = 0
+while i != 31
+  date << table[i][j]
+  i += 1
+end
+# Humid Array
+i = 1
+j = 7
+while i != 31
+  humid << table[i][j].to_i
+  i += 1
+end
+
+# Max Humidity
+max_humidity = humid[0]
+date_counter = -1
+for i in humid
+  if max_humidity < i
+    max_humidity = i
+    date_counter = humid.index(i)
   end
 end
 
-puts getDay("thurs")
+# Max Temperature
+max_temp = temp[0]
+j = -1
+for i in temp
+  if i > max_temp
+    max_temp = i
+    j = temp.index(i)
+  end
+end
+
+# Min Temperature
+min_temp = temp[0]
+min_date = -1
+for i in temp
+  if i < min_temp
+    min_temp = i
+    min_date = temp.index(i)
+  end
+end
+
+
+# Display Results
+puts "Highest: #{max_temp}C on #{date[j]}"
+puts "Lowest: #{min_temp}C on #{date[min_date]}"
+puts "Humid: #{max_humidity}% on #{date[date_counter]}"
+
+
